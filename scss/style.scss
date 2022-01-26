@@ -4,78 +4,46 @@ $light-grey: #eaeaeb;
 $dark-grey: #464646;
 $yellow: #fabe50;
 
-.header{
-    font-family: Arial, Helvetica, sans-serif;
-    // parent selector &
-    &__logo{
-        text-align: center;
-    }
-    &__img{
-        max-width: 350px;
-    }
+$img-width: 45%;
 
-    .menu{
-        &__list{
-            display: flex;
-            justify-content: center;
-            border-top: 1px solid $light-grey;
-            border-bottom: 1px solid $light-grey;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-            padding: 20px 0;
-        }
-
-        &__links{
-            position: relative;
-            
-            &:not(:last-child)::after{
-                content: "";
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                right: -3px;
-                margin: auto;
-                height: 15px;
-                width:1px;
-                background-color: $light-grey;
-            }
-        }
+// Placeholder Selector
+%no-decoration{text-decoration: none;}
+%u-decoration{text-decoration: underline;}
 
 
-        &__link{
-            padding: 0 25px;
-            color: $dark-grey;
-            
-            &:hover{
-                color: $purple;
-            }
-        }
-
-    }
+@mixin reset-list  {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-/* Este trecho de estilo se
-refere ao rodapé do blog */
-.footer{
-    text-align: center;
-    padding: 20px 0;
-    font-family: Arial, Helvetica, sans-serif;
-    // Este trecho de estilo posiciona o footer na parte de baixo da tela
-    position: relative;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    &__logo{
-        max-width: 100px;
-    }
-    
-    &__txt{
-        margin: auto;
-        font-size:14px;
-    }
+@mixin flx($property,$jty-cnt){
+    display: flex;
+    #{$property}: $jty-cnt;
 }
+
+@mixin for-phone-only{
+    @media (max-width: 767.98px){@content;}
+} 
+
+@mixin for-tablet-only{
+    @media (min-width: 768px) and (max-width: 1199.98px){@content;}
+}
+
+@mixin for-desktop-only{
+    @media (min-width: 1200px){@content;}
+}
+
+@function calculateRem($size){
+    @return $size / 16px * 1rem;
+}
+
+@mixin fontSize($size){
+    font-size: calculateRem($size);
+}
+
+@import "header" , "footer", "about", "article";
+
 
 .main{
     display: flex;
@@ -84,6 +52,11 @@ refere ao rodapé do blog */
     font-family: Arial, Helvetica, sans-serif;
 
     &__content{
+        @include for-phone-only{
+            width: 100%;
+        }
+
+
         width: 70%;
         padding: 40px 8px;
     }
@@ -96,7 +69,8 @@ refere ao rodapé do blog */
 
     &__title{
         text-decoration: none;
-        font-size: 22px;
+        @include fontSize(22px);
+        // font-size: 22px;
         color: $dark-grey;
         letter-spacing: 1.5;
         &:hover{
@@ -106,13 +80,15 @@ refere ao rodapé do blog */
 
     &_subtitle{
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         margin: 10px 0 20px 0;
     }
 
     &__date{
-        margin: 0 10px;
+        margin: 20px 0;
         font-size: 12px;
         font-style: italic;
     }
@@ -190,4 +166,69 @@ refere ao rodapé do blog */
             color: $purple;
         }
     }
+
+    &__sidebar{
+        width: 25%;
+        padding: 40px 10px;
+        @media (max-width: 767.98px){
+            display:none;
+        }
+    }
+
+    .sidebar{
+        &__top{
+            border: 1px solid $light-grey;
+            padding: 15px 20px;
+        }
+
+        &__title{
+            background-color: $yellow;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 0;
+            letter-spacing: 1.5px;
+        }
+
+        &__posts{
+            @include reset-list;
+        }
+
+        &__list{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 15px 0;
+            &:not(:last-child){
+                border-bottom: 1px dashed $light-grey;
+            }
+        }
+
+        &__img{
+            width: 40%;
+        }
+
+        &__details{
+            width: 50%;
+            padding-left: 10px;
+        }
+
+        &__post-title{
+            font-size: 14px;
+            color: $purple;
+            @extend %no-decoration;
+
+            &:hover{
+                @extend %u-decoration;
+            }
+        }
+
+        &__post-date{
+            font-size: 12px;
+            margin: 5px 0 0 0;
+        }
+    }
 }
+
+
+
