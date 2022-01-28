@@ -42,7 +42,17 @@ $img-width: 45%;
     font-size: calculateRem($size);
 }
 
-@import "header" , "footer", "about", "article";
+@import "header" , "footer", "about", "article", "collection", "contact";
+
+$directions: top, bottom, left, right;
+$layout-margin-size: 10px;
+
+@each $direction in $directions{
+    %no-margin-#{$direction}{margin-#{$direction}: 0;}
+    %default-margin-#{$direction}{margin-#{$direction}: $layout-margin-size;}
+    %double-margin-#{$direction}{margin-#{$direction}: $layout-margin-size * 2;}
+    %half-margin-#{$direction}{margin-#{$direction}: $layout-margin-size / 2;}
+}
 
 
 .main{
@@ -64,13 +74,13 @@ $img-width: 45%;
     &__post{
         text-align: center;
         max-width: 800px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     &__title{
         text-decoration: none;
         @include fontSize(22px);
-        // font-size: 22px;
         color: $dark-grey;
         letter-spacing: 1.5;
         &:hover{
@@ -78,27 +88,31 @@ $img-width: 45%;
         }
     }
 
-    &_subtitle{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+    &__subtitle{
+        @include flx(justify-content, center);
+        // display: flex;
+        // justify-content: center;
+        // flex-direction: row;
+        // flex-wrap: wrap;
         align-items: center;
-        margin: 10px 0 20px 0;
+        // margin: 10px 0 20px 0;
+        @extend %default-margin-top, %double-margin-bottom;
     }
 
     &__date{
-        margin: 20px 0;
-        font-size: 12px;
+        // margin: 0 10px;
+        @extend %no-margin-top, %no-margin-bottom, %default-margin-left, %default-margin-right;
+        // font-size: 12px;
+        @include fontSize(12px);
         font-style: italic;
     }
-
     &__tag{
         font-size: 14px;
         padding: 5px 7px;
         color: $purple;
         border: 1px solid $purple;
-        margin: 0 10px;
+        // margin: 0 10px;
+        @extend %no-margin-top, %no-margin-bottom, %default-margin-left, %default-margin-right;
     }
 
     &__details{
@@ -114,12 +128,14 @@ $img-width: 45%;
         max-width: 650px;
         margin-left: auto;
         margin-right: auto;
-        font-size: 14px;
+        @include fontSize(14px);
+        // font-size: 14px;
     }
 
     &__btn{
         text-decoration: none;
-        font-size: 16px;
+        // font-size: 16px;
+        @include fontSize(16px);
         letter-spacing: 1.5;
         color: $purple;
         background-color: $yellow;
@@ -132,8 +148,9 @@ $img-width: 45%;
     }
 
     &__info{
-        display: flex;
-        justify-content: space-between;
+        @include flx(justify-content, space-between);
+        // display: flex;
+        // justify-content: space-between;
         align-items: center;
         border-top: 1px solid $light-grey;
         margin-top: 30px;
@@ -145,10 +162,12 @@ $img-width: 45%;
     }
 
     &__p{
-        font-size: 14px;
+        @include fontSize(14px);
+        // font-size: 14px;
         color: $dark-grey;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        // margin-top: 10px;
+        // margin-bottom: 10px;
+        @extend %default-margin-top, %default-margin-bottom;
     }
 
     &__comments{
@@ -157,10 +176,12 @@ $img-width: 45%;
 
     &__a{
         text-decoration: none;
-        font-size: 14px;
+        @include fontSize(14px);
+        // font-size: 14px;
         color: $dark-grey;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        // margin-top: 10px;
+        // margin-bottom: 10px;
+        @extend %default-margin-top, %default-margin-bottom;
 
         &:hover{
             color: $purple;
@@ -185,7 +206,8 @@ $img-width: 45%;
             background-color: $yellow;
             text-align: center;
             padding: 10px 20px;
-            margin: 0;
+            // margin: 0;
+            @extend %no-margin-top, %no-margin-bottom, %no-margin-left, %no-margin-right;
             letter-spacing: 1.5px;
         }
 
@@ -194,8 +216,9 @@ $img-width: 45%;
         }
 
         &__list{
-            display: flex;
-            justify-content: center;
+            @include flx(justify-content, center);
+            // display: flex;
+            // justify-content: center;
             flex-wrap: wrap;
             align-items: center;
             padding: 15px 0;
@@ -214,7 +237,7 @@ $img-width: 45%;
         }
 
         &__post-title{
-            font-size: 14px;
+            @include fontSize(14px);
             color: $purple;
             @extend %no-decoration;
 
@@ -224,8 +247,10 @@ $img-width: 45%;
         }
 
         &__post-date{
-            font-size: 12px;
-            margin: 5px 0 0 0;
+            @include fontSize(12px);
+            // font-size: 12px;
+            // margin: 5px 0 0 0;
+            @extend %half-margin-top, %no-margin-right, %no-margin-bottom, %no-margin-left;
         }
     }
 }

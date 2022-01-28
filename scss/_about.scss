@@ -20,7 +20,8 @@
         // font-size: 22px;
         color: $dark-grey;
         letter-spacing: 1px;
-        margin: 5px 0 10px 0;
+        // margin: 5px 0 10px 0;
+        @extend %half-margin-top, %no-margin-right, %default-margin-bottom, %no-margin-left;
     }
 
     .breadcrumb{
@@ -49,7 +50,8 @@
     &__img{
         // @extend %double-margin-bottom;
         width: 100%;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
+        @extend %double-margin-bottom;
     }
 
     &__intro{

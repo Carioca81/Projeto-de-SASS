@@ -13,10 +13,12 @@
     }
 
     &__h1{
-        font-size: 22px;
+        @include fontSize(22px);
+        // font-size: 22px;
         color: $dark-grey;
         letter-spacing: 1px;
-        margin: 5px 0 10px 0;
+        @extend %half-margin-top, %no-margin-right, %default-margin-bottom, %no-margin-left;
+        // margin: 5px 0 10px 0;
     }
 
     
@@ -27,7 +29,8 @@
         align-items: center;
         
         &__link{
-            font-size: 12px;
+            @include fontSize(12px);
+            // font-size: 12px;
             @extend %no-decoration;
             color: $dark-grey;
             &:hover{
@@ -43,7 +46,8 @@
     }
     
     &__img{
-        margin-bottom: 20px;
+        @extend %double-margin-bottom;
+        // margin-bottom: 20px;
         width: 100%;
     }
 
@@ -53,7 +57,8 @@
     }
 
     &__date{
-        margin: 0 10px;
+        // margin: 0 10px;
+        @extend %no-margin-top, %no-margin-bottom, %default-margin-right, %default-margin-left;
         font-size: 12px;
         font-style: italic;
     }
@@ -63,7 +68,8 @@
         padding: 5px 7px;
         color: $purple;
         border: 1px solid $purple;
-        margin: 0 10px;
+        // margin: 0 10px;
+        @extend %no-margin-top, %no-margin-bottom, %default-margin-right, %default-margin-left;
     }
 
     &__content{
@@ -71,5 +77,6 @@
         font-size: 14px;
         color: $dark-grey;
         padding: 10px 20px;
+        @extend %default-margin-top, %default-margin-bottom, %double-margin-right, %double-margin-left;
     }
 }
